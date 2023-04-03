@@ -1,0 +1,31 @@
+{
+  "name": "whatsapp-back-end",
+  "version": "1.0.0",
+  "description": "Back-End WhatsApp Services",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "dev": "nodemon --experimental-specifier-resolution=node ./src/server.js ",
+    "start": "node --es-module-specifier-resolution=node ./src/server.js"
+  },
+  "author": "Edgar Axel Gonzalez Martinez",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.7",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.10.4",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "swagger-ui-express": "^4.6.2"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
+  }
+}
