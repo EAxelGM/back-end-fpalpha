@@ -9,18 +9,20 @@ export const estadisticas = async (req, res) => {
       (a, b) => a + parseInt(b.info_open_library.pages || 0),
       0
     );
-    const pages_read_average = (total_pages_read / books_read.length).toFixed(
-      2
-    );
+    const pages_read_average =
+      books_read.length === 0
+        ? 0
+        : (total_pages_read / books_read.length).toFixed(2);
 
     const qualification_total = books_read.reduce(
       (a, b) => a + parseInt(b.qualification || 0),
       0
     );
 
-    const qualification_average = (
-      qualification_total / books_read.length
-    ).toFixed(2);
+    const qualification_average =
+      books_read.length === 0
+        ? 0
+        : (qualification_total / books_read.length).toFixed(2);
 
     return response(res, {
       data: {
