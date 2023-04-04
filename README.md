@@ -30,6 +30,8 @@ cd back-end-fpalpha
 npm install
 ```
 
+es necesario copiar el archivo `.env.example` y llamarlo solo `.env` y llenar los campos apra nuestro accessos
+
 por ultimo para la ejecución de este proyecto es
 
 ```
