@@ -3,7 +3,16 @@ import BookRead from "../../models/BookRead";
 
 export const estadisticas = async (req, res) => {
   try {
-    const books_read = await BookRead.find({});
+    const year_actual = new Date().getFullYear();
+
+    const query = {
+      start_date: {
+        $gte: new Date(`${year_actual}-01-01 00:00:00`),
+        $lt: new Date(`${year_actual}-12-31 23:59:59`),
+      },
+    };
+
+    const books_read = await BookRead.find(query);
 
     const total_pages_read = books_read.reduce(
       (a, b) => a + parseInt(b.info_open_library.pages || 0),
