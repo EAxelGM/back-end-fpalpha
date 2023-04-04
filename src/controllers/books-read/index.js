@@ -1,9 +1,21 @@
 import { response } from "../../helpers";
-import Book from "../../models/Book";
+import BookRead from "../../models/BookRead";
+import Joi from "joi";
+import optionsJoi from "../../helpers/validations";
+
+const SchemaValidation = Joi.object({
+  title: Joi.string(),
+  start_date: Joi.date(),
+  end_date: Joi.date(),
+  qualification: Joi.number(),
+  review: Joi.string(),
+  id_open_library: Joi.string(),
+  info_open_library: Joi.any(),
+});
 
 export const getAll = async (req, res) => {
   try {
-    const data = await Book.find({});
+    const data = await BookRead.find({}).sort({ start_date: -1 });
 
     return response(res, { data });
   } catch (error) {
@@ -14,7 +26,10 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
   try {
-    const data = await Book.find({});
+    const data = await BookRead.findOne({ _id: req.params.id });
+    if (!data) {
+      throw { message: "No se encontro" };
+    }
 
     return response(res, { data });
   } catch (error) {
@@ -25,7 +40,8 @@ export const getOne = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
-    const data = await Book.find({});
+    const value = await SchemaValidation.validateAsync(req.body);
+    const data = await BookRead.create({ ...value });
 
     return response(res, { data });
   } catch (error) {
@@ -36,7 +52,8 @@ export const create = async (req, res) => {
 
 export const update = async (req, res) => {
   try {
-    const data = await Book.find({});
+    const value = await SchemaValidation.validateAsync(req.body);
+    const data = await BookRead.findByIdAndUpdate(req.params.id, { ...value });
 
     return response(res, { data });
   } catch (error) {
@@ -47,7 +64,7 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const data = await Book.find({});
+    const data = await BookRead.findByIdAndDelete(req.params.id);
 
     return response(res, { data });
   } catch (error) {
