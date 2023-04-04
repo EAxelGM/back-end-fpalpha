@@ -40,6 +40,7 @@ export const estadisticas = async (req, res) => {
         pages_read_average,
         qualification_total,
         qualification_average,
+        year_actual,
       },
     });
   } catch (error) {
